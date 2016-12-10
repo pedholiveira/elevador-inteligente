@@ -21,29 +21,32 @@
         <div class="container">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th ng-repeat="elevador in vm.elevadores; track by $index">Elevador {{$index + 1}}</th>
-                    <th width="150px">#</th>
-                </tr>
+                  <tr>
+                      <th>#</th>
+                      <th ng-repeat="elevador in vm.elevadores; track by $index">Elevador {{$index + 1}}</th>
+                      <th width="150px">#</th>
+                  </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="iteracao in vm.obterNumeroIteracoes(vm.numeroAndares); track by $index" ng-init="i = $index">
-                    <th scope="row">Andar {{vm.numeroAndares - i}}</th>
-                    <td ng-repeat="elevador in vm.elevadores">
-                        <span ng-if="elevador.localizacao == (vm.numeroAndares - i)">1</span>
-                        <span ng-if="elevador.localizacao != (vm.numeroAndares - i)">0</span>
-                    </td>
-
-                    <th scope="row">
-                        <div class="row">
-                            <select class="form-control" style="width: 70px; float: left; margin-right: 5px"
-                                    ng-model="andarSelecionado"
-                                    ng-options="andar as andar for andar in vm.obterAndares()"></select>
-                            <button type="button" class="btn btn-primary" ng-click="vm.chamarElevador(vm.numeroAndares - i, andarSelecionado)">Chamar</button>
+                  <tr ng-repeat="iteracao in vm.obterNumeroIteracoes(vm.numeroAndares); track by $index" ng-init="i = $index">
+                      <th scope="row">Andar {{vm.numeroAndares - i}}</th>
+                      <td ng-repeat="elevador in vm.elevadores">
+                        <div ng-if="elevador.localizacao == (vm.numeroAndares - i)">
+                          <span class="fa fa-circle"></span>
+                          <span class="fa fa-male" ng-repeat="pessoa in vm.obterNumeroIteracoes(elevador.quantidadePessoas); track by $index"></span>
                         </div>
-                    </th>
-                </tr>
+                      </td>
+
+                      <th scope="row">
+                          <div class="row">
+                              <select class="form-control" style="width: 70px; float: left; margin-right: 5px"
+                                      ng-model="andarSelecionado"
+                                      ng-options="andar as andar for andar in vm.obterAndares()">
+                              </select>
+                              <button type="button" class="btn btn-primary" ng-click="vm.chamarElevador(vm.numeroAndares - i, andarSelecionado)">Chamar</button>
+                          </div>
+                      </th>
+                  </tr>
                 </tbody>
             </table>
         </div>
