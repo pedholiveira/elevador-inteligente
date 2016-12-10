@@ -81,10 +81,10 @@
               if(elevador.estado == "PARADO") {
                 elevador.estado = "BUSCANDO";
                 return elevador;
-              } else if (subindo && elevador.localizacao <= andarAtual) {
+              } else if (subindo && elevador.localizacao < andarAtual) {
                 elevador.estado = "MEIO";
                 return elevador;
-              } else if (descendo && elevador.localizacao >= andarAtual) {
+              } else if (descendo && elevador.localizacao > andarAtual) {
                 elevador.estado = "MEIO";
                 return elevador;
               }
